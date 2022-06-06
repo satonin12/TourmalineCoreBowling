@@ -16,4 +16,16 @@ describe('test Class Bowling for working', () => {
 
     expect(console.log).toHaveBeenCalledWith(testMsg);
   });
+
+  it('should return 10 when hitting a strike', () => {
+    game.roll(10);
+    expect(game.score).toEqual<number>(10);
+  })
+
+  it('should return 14 when hitting a strike + strike bonus', () => {
+    game.roll(10);
+    game.roll(1);
+    game.roll(1);
+    expect(game.score).toEqual<number>(14);
+  })
 });
