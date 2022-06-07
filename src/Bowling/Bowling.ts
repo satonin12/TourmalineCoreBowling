@@ -40,29 +40,17 @@ class Bowling implements IBowling {
     return score;
   };
 
-  sumFrame = (rollIndex : number) => {
-    return checkNumber(this.frames[rollIndex]) + checkNumber(this.frames[rollIndex + 1]);
-  }
+  sumFrame = (rollIndex : number) => checkNumber(this.frames[rollIndex]) + checkNumber(this.frames[rollIndex + 1]);
 
   // bonus methods
-  strikeBonus = (rollIndex : number) => {
-    return checkNumber(this.frames[rollIndex + 1]) + checkNumber(this.frames[rollIndex + 2]) + 10;
-  };
-
-  spareBonus = (rollIndex : number) => {
-    return checkNumber(this.frames[rollIndex + 2]) + 10;
-  };
-
-  spareWithStrikeBonus = (rollIndex : number) : number => {
-    return checkNumber(this.frames[rollIndex + 1]) + 10;
-  }
+  strikeBonus = (rollIndex : number) => checkNumber(this.frames[rollIndex + 1]) + checkNumber(this.frames[rollIndex + 2]) + 10;
+  spareBonus = (rollIndex : number) => checkNumber(this.frames[rollIndex + 2]) + 10;
+  spareWithStrikeBonus = (rollIndex : number)  => checkNumber(this.frames[rollIndex + 1]) + 10;
 
   // boolean methods
   isStrike = (rollIndex : number) => this.frames[rollIndex] === 10;
   isSpare = (frameScore : number) => frameScore >= 10;
-  iStrikeAfterSpare = (frameScore : number, rollIndex: number) : boolean => {
-    return this.isStrike(rollIndex + 1);
-  }
+  iStrikeAfterSpare = (frameScore : number, rollIndex: number) => this.isStrike(rollIndex + 1);
 
   //log methods
   logToConsole = (msg : string) => console.log(msg || 'logToConsole');
