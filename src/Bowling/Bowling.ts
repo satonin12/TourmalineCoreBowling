@@ -10,23 +10,26 @@ class Bowling implements IBowling {
 
   get score() {
     let score : number = 0;
+    let rollIndex : number = 0;
 
-    for(let frameI = 0; frameI < 10; frameI++) {
-      if(this.isStrike(this.frames[frameI])) {
-        score += this.strikeBonus(frameI);
+    for(let frameI = 0; frameI < this.frames.length; frameI++) {
+      if(this.isStrike(rollIndex)) {
+        score += this.strikeBonus(rollIndex);
+        rollIndex++;
         continue;
       }
 
-      let frameScore = this.sumFrame(frameI);
+      let frameScore = this.sumFrame(rollIndex);
 
-      if(this.isSpare(this.frames[frameI])) {
-        score += this.spareBonus(frameI)
+      if(this.isSpare(frameScore)) {
+        score += this.spareBonus(rollIndex)
       } else {
         // TODO: fill the array with zeros so as not to check for undefined
         score += frameScore;
       }
-
+      rollIndex += 2;
     }
+
     return score;
   };
 
@@ -45,7 +48,7 @@ class Bowling implements IBowling {
 
   // boolean methods
   isStrike = (rollIndex : number) => this.frames[rollIndex] === 10;
-  isSpare = (frameScore : number) => frameScore === 10;
+  isSpare = (frameScore : number) => frameScore >= 10;
 
   //log methods
   logToConsole = (msg : string) => console.log(msg || 'logToConsole');
