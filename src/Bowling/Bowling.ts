@@ -40,6 +40,15 @@ class Bowling implements IBowling {
     return score;
   };
 
+  get lastScore() {
+    const score = this.score;
+    const rolls = this.frames;
+    return {
+      score,
+      rolls,
+    };
+  }
+
   sumFrame = (rollIndex : number) => checkNumber(this.frames[rollIndex]) + checkNumber(this.frames[rollIndex + 1]);
 
   // bonus methods
