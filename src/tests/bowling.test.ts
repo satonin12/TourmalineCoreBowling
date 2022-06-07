@@ -161,6 +161,28 @@ describe("test Class Bowling for working", () => {
     expect(game.score).toEqual(138);
   });
 
+  it('should return last frame and throws', () => {
+    game.roll(5); // 1
+    game.roll(5); // 2
+
+    // get a second frame and throws
+    let lastScore = game.lastScore;
+    expect(lastScore).toEqual({
+      score: 10,
+      rolls: [5, 5]
+    })
+
+    game.roll(1); // 3
+
+    // get a third frame and throws
+    lastScore = game.lastScore;
+    expect(lastScore).toEqual({
+      score: 12,
+      rolls: [5, 5, 1]
+    })
+
+  })
+
   const rollMore = (rolls: number, pins: number): void => {
     for (let i = 0; i < rolls; i++) game.roll(pins);
   };
