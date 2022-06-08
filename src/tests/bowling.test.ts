@@ -1,3 +1,17 @@
+/*
+* test cases:
+* 1. 0x20 = 0
+  2. 1x20 = 20
+  3. 10 = 10 (strike)
+  3. 10/1/1 = 14 (strike + 2 next frame)
+  4. max score (300)
+  5. 5/5/1 = 12 (spare bonus)
+  5,6,7,8,9,10,11,12,13: 24, 30, 44, 46, 66, 76, 126, 138, 168 - score (with a strike + spare + skittle score)
+  14. get a last frame and throws
+*
+*
+* */
+
 import Bowling from "../Bowling/Bowling";
 
 describe("test Class Bowling for working", () => {
@@ -5,16 +19,6 @@ describe("test Class Bowling for working", () => {
 
   beforeEach(() => {
     game = new Bowling();
-  });
-
-  // * test for working Class Bowling, also method logToConsole
-  it("working class & method log", () => {
-    const testMsg: string = "test msg for working";
-
-    console.log = jest.fn();
-    game.logToConsole(testMsg);
-
-    expect(console.log).toHaveBeenCalledWith(testMsg);
   });
 
   // test showing result 0, if you do not knock out more than one pin
@@ -56,7 +60,7 @@ describe("test Class Bowling for working", () => {
 
   // **
 
-  it("should return 24 for calculateScore(X|7) and second frame for showFrame(1)", () => {
+  it("should return 24", () => {
     game.roll(10);
     game.roll(7);
 
@@ -155,10 +159,32 @@ describe("test Class Bowling for working", () => {
     game.roll(2);
     game.roll(3);
 
-    // game.roll(6);
-    // game.roll(7);
-
     expect(game.score).toEqual(138);
+  });
+
+  it("should return 168", () => {
+    game.roll(10);
+
+    game.roll(7);
+    game.roll(3);
+
+    game.roll(7);
+    game.roll(2);
+
+    game.roll(9);
+    game.roll(10);
+
+    game.roll(10);
+    game.roll(10);
+
+    game.roll(2);
+    game.roll(3);
+
+    game.roll(6);
+    game.roll(4);
+    game.roll(7);
+
+    expect(game.score).toEqual(162);
   });
 
   it('should return last frame and throws', () => {
