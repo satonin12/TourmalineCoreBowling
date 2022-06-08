@@ -7,5 +7,4 @@ export interface IBowling {
   isStrike: (rollIndex : number) => boolean;
   isSpare: (frameScore : number) => boolean;
   iStrikeAfterSpare: (frameScore : number, rollIndex : number) => boolean;
-  logToConsole: (msg : string) => void;
 }

@@ -23,7 +23,6 @@ class Bowling implements IBowling {
 
       if(this.isSpare(frameScore)) {
         if(this.iStrikeAfterSpare(frameScore, rollIndex)) {
-          // TODO: repetition of the code - the same situation with the strike
           score += this.spareWithStrikeBonus(rollIndex)
           rollIndex ++;
           continue;
@@ -31,9 +30,9 @@ class Bowling implements IBowling {
           score += this.spareBonus(rollIndex)
         }
       } else {
-        // TODO: fill the array with zeros so as not to check for undefined
         score += frameScore;
       }
+
       rollIndex += 2;
     }
 
@@ -60,9 +59,6 @@ class Bowling implements IBowling {
   isStrike = (rollIndex : number) => this.frames[rollIndex] === 10;
   isSpare = (frameScore : number) => frameScore >= 10;
   iStrikeAfterSpare = (frameScore : number, rollIndex: number) => this.isStrike(rollIndex + 1);
-
-  //log methods
-  logToConsole = (msg : string) => console.log(msg || 'logToConsole');
 }
 
 export default Bowling;
