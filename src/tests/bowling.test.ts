@@ -24,30 +24,30 @@ describe("test Class Bowling for working", () => {
   // test showing result 0, if you do not knock out more than one pin
   it("should return 0 for a zeros in all frame", () => {
     rollMore(20, 0);
-    expect(game.score).toEqual(0);
+    expect(game.getScore()).toEqual(0);
   });
 
   // tests showing result 20, if in each round (in two throws) one pin is knocked out
   it("should return 20 for a ones in all frame", () => {
     rollMore(20, 1);
-    expect(game.score).toEqual(20);
+    expect(game.getScore()).toEqual(20);
   });
 
   it("should return 10 when hitting a strike", () => {
     game.roll(10);
-    expect(game.score).toEqual<number>(10);
+    expect(game.getScore()).toEqual<number>(10);
   });
 
   it("should return 14 when hitting a strike + strike bonus", () => {
     game.roll(10);
     game.roll(1);
     game.roll(1);
-    expect(game.score).toEqual<number>(14);
+    expect(game.getScore()).toEqual<number>(14);
   });
 
   it("should return 300 as the maximum score in the game", () => {
     rollMore(10000, 10);
-    expect(game.score).toEqual(300);
+    expect(game.getScore()).toEqual(300);
   });
 
   it("handles a spare with correct bonus", () => {
@@ -55,7 +55,7 @@ describe("test Class Bowling for working", () => {
     game.roll(5);
     game.roll(1);
     rollMore(17, 0);
-    expect(game.score).toEqual(12);
+    expect(game.getScore()).toEqual(12);
   });
 
   // **
@@ -64,7 +64,7 @@ describe("test Class Bowling for working", () => {
     game.roll(10);
     game.roll(7);
 
-    expect(game.score).toEqual(24);
+    expect(game.getScore()).toEqual(24);
   });
 
   it("should return 30", () => {
@@ -72,7 +72,7 @@ describe("test Class Bowling for working", () => {
     game.roll(7);
     game.roll(3);
 
-    expect(game.score).toEqual(30);
+    expect(game.getScore()).toEqual(30);
   });
 
   it("should return 44", () => {
@@ -81,7 +81,7 @@ describe("test Class Bowling for working", () => {
     game.roll(3);
     game.roll(7);
 
-    expect(game.score).toEqual(44);
+    expect(game.getScore()).toEqual(44);
   });
 
   it("should return 46", () => {
@@ -91,7 +91,7 @@ describe("test Class Bowling for working", () => {
     game.roll(7);
     game.roll(2);
 
-    expect(game.score).toEqual(46);
+    expect(game.getScore()).toEqual(46);
   });
 
   it("should return 66", () => {
@@ -106,7 +106,7 @@ describe("test Class Bowling for working", () => {
 
     game.roll(10);
 
-    expect(game.score).toEqual(66);
+    expect(game.getScore()).toEqual(66);
   });
 
   it("should return 76", () => {
@@ -120,7 +120,7 @@ describe("test Class Bowling for working", () => {
     game.roll(9);
     game.roll(10);
 
-    expect(game.score).toEqual(76);
+    expect(game.getScore()).toEqual(76);
   });
 
   it("should return 126", () => {
@@ -138,7 +138,7 @@ describe("test Class Bowling for working", () => {
     game.roll(10);
     game.roll(10);
 
-    expect(game.score).toEqual(126);
+    expect(game.getScore()).toEqual(126);
   });
 
   it("should return 138", () => {
@@ -159,7 +159,7 @@ describe("test Class Bowling for working", () => {
     game.roll(2);
     game.roll(3);
 
-    expect(game.score).toEqual(138);
+    expect(game.getScore()).toEqual(138);
   });
 
   it("should return 168", () => {
@@ -184,7 +184,7 @@ describe("test Class Bowling for working", () => {
     game.roll(4);
     game.roll(7);
 
-    expect(game.score).toEqual(162);
+    expect(game.getScore()).toEqual(162);
   });
 
   it('should return last frame and throws', () => {
@@ -192,7 +192,7 @@ describe("test Class Bowling for working", () => {
     game.roll(5); // 2
 
     // get a second frame and throws
-    let lastScore = game.lastScore;
+    let lastScore = game.getLastScore();
     expect(lastScore).toEqual({
       score: 10,
       rolls: [5, 5]
@@ -201,7 +201,7 @@ describe("test Class Bowling for working", () => {
     game.roll(1); // 3
 
     // get a third frame and throws
-    lastScore = game.lastScore;
+    lastScore = game.getLastScore();
     expect(lastScore).toEqual({
       score: 12,
       rolls: [5, 5, 1]

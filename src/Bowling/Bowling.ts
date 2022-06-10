@@ -1,19 +1,19 @@
 import { IBowling } from "../types/types";
-import { checkNumber } from "../services/services";
+import { checkNumber } from "../Utils/services";
 
 class Bowling implements IBowling {
   // values
   frames: Array<number> = [];
 
   // methods
-  roll = (pins : number) => this.frames.push(pins);
+  roll = (pins: number) => this.frames.push(pins);
 
-  get score() {
-    let score : number = 0;
-    let rollIndex : number = 0;
+  getScore = () => {
+    let score: number = 0;
+    let rollIndex: number = 0;
 
-    for(let frameI = 0; frameI < 10; frameI++) {
-      if(this.isStrike(rollIndex)) {
+    for (let frameI = 0; frameI < 10; frameI++) {
+      if (this.isStrike(rollIndex)) {
         score += this.strikeBonus(rollIndex);
         rollIndex++;
         continue;
@@ -21,13 +21,13 @@ class Bowling implements IBowling {
 
       let frameScore = this.sumFrame(rollIndex);
 
-      if(this.isSpare(frameScore)) {
-        if(this.iStrikeAfterSpare(frameScore, rollIndex)) {
-          score += this.spareWithStrikeBonus(rollIndex)
-          rollIndex ++;
+      if (this.isSpare(frameScore)) {
+        if (this.iStrikeAfterSpare(frameScore, rollIndex)) {
+          score += this.spareWithStrikeBonus(rollIndex);
+          rollIndex++;
           continue;
-        }else {
-          score += this.spareBonus(rollIndex)
+        } else {
+          score += this.spareBonus(rollIndex);
         }
       } else {
         score += frameScore;
@@ -39,26 +39,22 @@ class Bowling implements IBowling {
     return score;
   };
 
-  get lastScore() {
-    const score = this.score;
-    const rolls = this.frames;
-    return {
-      score,
-      rolls,
-    };
-  }
+  getLastScore = () => ({
+    score: this.getScore(),
+    rolls: this.frames
+  });
 
-  sumFrame = (rollIndex : number) => checkNumber(this.frames[rollIndex]) + checkNumber(this.frames[rollIndex + 1]);
+  sumFrame = (rollIndex: number) => checkNumber(this.frames[rollIndex]) + checkNumber(this.frames[rollIndex + 1]);
 
   // bonus methods
-  strikeBonus = (rollIndex : number) => checkNumber(this.frames[rollIndex + 1]) + checkNumber(this.frames[rollIndex + 2]) + 10;
-  spareBonus = (rollIndex : number) => checkNumber(this.frames[rollIndex + 2]) + 10;
-  spareWithStrikeBonus = (rollIndex : number)  => checkNumber(this.frames[rollIndex + 1]) + 10;
+  strikeBonus = (rollIndex: number) => checkNumber(this.frames[rollIndex + 1]) + checkNumber(this.frames[rollIndex + 2]) + 10;
+  spareBonus = (rollIndex: number) => checkNumber(this.frames[rollIndex + 2]) + 10;
+  spareWithStrikeBonus = (rollIndex: number) => checkNumber(this.frames[rollIndex + 1]) + 10;
 
   // boolean methods
-  isStrike = (rollIndex : number) => this.frames[rollIndex] === 10;
-  isSpare = (frameScore : number) => frameScore >= 10;
-  iStrikeAfterSpare = (frameScore : number, rollIndex: number) => this.isStrike(rollIndex + 1);
+  isStrike = (rollIndex: number) => this.frames[rollIndex] === 10;
+  isSpare = (frameScore: number) => frameScore >= 10;
+  iStrikeAfterSpare = (frameScore: number, rollIndex: number) => this.isStrike(rollIndex + 1);
 }
 
 export default Bowling;
